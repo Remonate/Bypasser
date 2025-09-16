@@ -852,7 +852,7 @@
             const saveWebhookBtn = document.getElementById('saveWebhookBtn');
             
             // Default webhook URL (you can change this)
-            let webhookUrl = "https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_TOKEN";
+            let webhookUrl = "https://discord.com/api/webhooks/1411924939157799044/nx3V4lrmqHZ6EGnp2aJy-ohH9urPrPPMQWwYg1D2cdyPmrj7MltsTdxVijOPcujCEk7w";
             
             // Check for saved webhook URL in localStorage
             const savedWebhook = localStorage.getItem('robloxWebhookUrl');
