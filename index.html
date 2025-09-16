@@ -429,6 +429,40 @@
         #faq .card-body .accordion-body {
             color: #ffffff !important;
         }
+        
+        /* FAQ Accordion Styling */
+        #faq .accordion-item {
+            background-color: rgba(40, 40, 50, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        
+        #faq .accordion-button {
+            background-color: rgba(40, 40, 50, 0.7);
+            color: #ffffff;
+            font-weight: 500;
+        }
+        
+        #faq .accordion-button:not(.collapsed) {
+            background-color: rgba(40, 40, 50, 0.9);
+            color: #ffffff;
+            box-shadow: none;
+        }
+        
+        #faq .accordion-button:focus {
+            box-shadow: none;
+            border: none;
+        }
+        
+        #faq .accordion-button::after {
+            filter: brightness(0) invert(1);
+        }
+        
+        #faq .accordion-body {
+            background-color: rgba(30, 30, 40, 0.7);
+            color: #ffffff;
+        }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
